@@ -1,5 +1,6 @@
 package com.lzy.youyin.view;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
@@ -14,17 +15,18 @@ import com.lzy.youyin.R;
 import com.lzy.youyin.base.BaseActivity;
 import com.lzy.youyin.base.BaseFragment;
 import com.lzy.youyin.utils.CommonUtils;
+import com.lzy.youyin.utils.alipay.AboutMeActivity;
 import com.orhanobut.dialogplus.DialogPlus;
-import com.orhanobut.dialogplus.OnDismissListener;
 import com.orhanobut.dialogplus.ViewHolder;
 
 import net.qiujuer.genius.kit.handler.Run;
-import net.qiujuer.genius.kit.handler.runable.Action;
 
 import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.OnLongClick;
 
 import static com.lzy.youyin.base.Constance.TOKEN;
@@ -47,7 +49,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        tabs = Arrays.asList(getResources().getString(R.string.tv_new), getResources().getString(R.string.tv_hot),getResources().getString(R.string.tv_search));
+        tabs = Arrays.asList(getResources().getString(R.string.tv_new), getResources().getString(R.string.tv_hot), getResources().getString(R.string.tv_search));
         initFragment();
         initViewPager();
         LoadDate();
@@ -84,7 +86,7 @@ public class MainActivity extends BaseActivity {
         NewFragment newFragment = new NewFragment();
         HotFragment hotFragment = new HotFragment();
         SearchFragment searchFragment = new SearchFragment();
-        fragments = Arrays.asList(newFragment, hotFragment,searchFragment);
+        fragments = Arrays.asList(newFragment, hotFragment, searchFragment);
     }
 
     @Override
@@ -92,12 +94,19 @@ public class MainActivity extends BaseActivity {
         super.onBackPressed();
         CommonUtils.doubleClickExitApp();
     }
+
+    @OnClick(R.id.img_more)
+    public void onViewClicked() {
+        Goto(AboutMeActivity.class);
+    }
+
     public static class Solution {
         public static void main(String[] args) {
 
             boolean palindrome = isPalindrome(123);
 
         }
+
         public static boolean isPalindrome(int x) {
             String s = String.valueOf(x);
             char[] chars = s.toCharArray();
@@ -109,8 +118,9 @@ public class MainActivity extends BaseActivity {
             return stringBuffer.toString().equals(s);
         }
     }
+
     @OnLongClick(R.id.frameLayout)
-    public void onLongClick(){
+    public boolean onLongClick() {
         ViewHolder viewHolder = new ViewHolder(R.layout.content_view);
         DialogPlus.newDialog(this)
                 .setContentHolder(viewHolder)
@@ -121,11 +131,12 @@ public class MainActivity extends BaseActivity {
                     EditText et_id = holderView.findViewById(R.id.et_id);
                     EditText et_token = holderView.findViewById(R.id.et_token);
                     Run.onBackground(() -> {
-                        SPUtils.getInstance().put("USERID",et_id.getText().toString());
-                        SPUtils.getInstance().put("TOKEN",et_token.getText().toString());
+                        SPUtils.getInstance().put("USERID", et_id.getText().toString());
+                        SPUtils.getInstance().put("TOKEN", et_token.getText().toString());
                     });
                 }).create().show();
-        ((EditText)viewHolder.getInflatedView().findViewById(R.id.et_id)).setText(USERID);
-        ((EditText)viewHolder.getInflatedView().findViewById(R.id.et_token)).setText(TOKEN);
+        ((EditText) viewHolder.getInflatedView().findViewById(R.id.et_id)).setText(USERID);
+        ((EditText) viewHolder.getInflatedView().findViewById(R.id.et_token)).setText(TOKEN);
+        return true;
     }
 }

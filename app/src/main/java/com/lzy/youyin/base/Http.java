@@ -7,6 +7,6 @@ import rxhttp.wrapper.annotation.DefaultDomain;
  */
 public class Http {
     @DefaultDomain()
-    public static final String HTTPURL = "https://www.uyinmusic.com";
+    public static final String HTTP_URL = "https://www.uyinmusic.com";
 
 }
