@@ -1,0 +1,104 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.lzy.youyin"
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        release {
+            keyAlias 'key0'
+            keyPassword '123123123'
+            storePassword '123123123'
+            storeFile file('../keystore/key.jks')
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    applicationVariants.all { variant ->
+        if (variant.buildType.name != "debug") {
+            variant.getPackageApplicationProvider().get().outputDirectory = new File(project.rootDir.absolutePath + "/apk")
+        }
+        variant.getPackageApplicationProvider().get().outputScope.apkDatas.forEach { apkData ->
+            apkData.outputFileName = ((project.name != "app") ? project.name : rootProject.name) + "-" +
+                    variant.versionName + "_" +
+                    variant.flavorName + "_" +
+                    variant.buildType.name +
+                    ".apk"
+        }
+
+    }
+
+    compileOptions {
+        sourceCompatibility '1.8'
+        targetCompatibility '1.8'
+    }
+    dexOptions {
+        //使用增量模式构建
+//        incremental true
+        //最大堆内存
+        javaMaxHeapSize "8g"
+        //是否支持大工程模式
+        jumboMode = true
+        //预编译
+        preDexLibraries = true
+        //线程数
+        threadCount = 6
+        jumboMode = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:design:28.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.github.the-pig-of-jungle.smart-show:all:2.7.6'
+    implementation 'com.blankj:utilcode:1.23.7'
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.androidkun:XTabLayout:1.1.3'
+    implementation 'net.qiujuer.genius:kit-handler:2.1.0'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-25'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
+    implementation 'net.qiujuer.genius:res:2.1.1'
+    implementation 'me.jessyan:autosize:1.1.2'
+    implementation 'com.github.tamsiree.RxTool:RxFeature:2.3.9'
+    implementation 'com.github.vondear.RxTool:RxKit:v2.0.4'
+    implementation 'com.github.tamsiree.RxTool:RxUI:2.3.9'
+    implementation 'com.jaeger.statusbarutil:library:1.5.1'
+    implementation 'com.blankj:rxbus:1.5'
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'cn.com.superLei:aop-arms:1.0.2'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.12'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+    implementation 'com.rxjava.rxhttp:rxhttp:1.1.5'
+    annotationProcessor 'com.rxjava.rxhttp:rxhttp-compiler:1.1.5'
+    implementation 'com.rxjava.rxlife:rxlife:1.0.7'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'net.qiujuer.genius:ui:2.1.1'
+    implementation 'com.github.chrisbanes:PhotoView:2.1.4'
+    implementation 'cn.jzvd:jiaozivideoplayer:6.0.0'
+    implementation 'com.youth.banner:banner:1.4.10'
+    implementation 'com.orhanobut:dialogplus:1.11@aar'
+}

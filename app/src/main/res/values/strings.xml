@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">悠音</string>
+    <string name="tv_new">最新</string>
+    <string name="tv_hot">最热</string>
+    <string name="tv_no_data">无数据</string>
+    <string name="tv_see_operas">查看曲谱</string>
+    <string name="tv_search">搜索</string>
+    <string name="tv_search_info">请输入名称</string>
+    <string name="tv_input">请输入你想查询的谱名</string>
+</resources>

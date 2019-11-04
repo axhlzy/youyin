@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/len_16"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UserId："/>
+
+        <EditText
+            android:id="@+id/et_id"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="当前账户的UserID"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UserId："/>
+
+        <EditText
+            android:id="@+id/et_token"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="当前账户Token"/>
+
+    </LinearLayout>
+
+</LinearLayout>
