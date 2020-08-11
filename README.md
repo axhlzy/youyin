@@ -3,6 +3,4 @@
 源地址：
 https://www.uyinmusic.com
 破解版地址：
-https://fir.im/yyww
-
-欢迎大佬前来品尝
+https://github.com/axhlzy/youyin/blob/master/apk/youyin-1.0__release.apk
